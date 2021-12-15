@@ -1,0 +1,69 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model MessageViewModel
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box p-l-20 p-r-20">
+            <h3 class="box-title m-b-0">All User's Messages </h3>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("User", "AllMessages", FormMethod.Post, new { @class = "floating-labels", role = "form", @id = "new-form", enctype = "multipart/form-data" }))
+                    {
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel">
+                        @if (Model.Messages != null)
+                        {
+                            if (Model.Messages.Count > 0)
+                            {
+                                <div class="table-responsive">
+                                    <table class="table table-hover manage-u-table" style="table-layout:fixed; width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th width="70" class="text-center">#</th>
+                                                <th class="text-center">Message Body</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                Model.Messages = Model.Messages.OrderByDescending(x => x.Id).ToList();
+                                            }
+                                            @foreach (var result in Model.Messages)
+                                            {
+                                                <tr>
+
+                                                    <td class="text-center">@result.Id</td>
+                                                    <td class="text-center">@result.MessageBody</td>
+
+                                                    <td>
+                                                        <a href="@Url.Action("DeleteMessage", "User", new { id = result.Id })" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></a>
+                                                        <a href="@Url.Action("EditMessage", "User", new { id = result.Id })" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></a>
+                                                        <a href="@Url.Action("WriteMessage", "User", new { id = result.UserId })" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                                    }
+                                                }
+                                                }
+                                                </div>
+                                                </div>
+                                                </div>
+                                                }
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
