@@ -9,6 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Task.Core;
+using Task.Core.Interfaces;
+using Task.DAL;
+using Task.DAL.Interfaces;
 using Task.Entities;
 using Task.Models;
 
@@ -28,7 +32,8 @@ namespace Task
         {
             services.AddControllersWithViews();
             services.AddDbContext<TaskDbContext>();
-
+            services.AddScoped<IMessageCore, MessageCORE>();
+            services.AddScoped<IMessageDAL, MessageDAL>();
             //services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddAutoMapper(cfg =>
             {
